@@ -1,8 +1,8 @@
-4. Dany jest spójny graf G=(V, E) z wagami wi przypisanymi do każdej krawędzi viV. Należy
-znaleźć ścieżkę łączącą wszystkie wierzchołki (każdy odwiedzony min. raz) taką, aby
-minimalizować jej koszt S. Koszt S obliczany jest w taki sposób, że stanowi ona sumę
+4. Dany jest spójny graf G=(V, E) z wagami wi przypisanymi do każdej krawędzi vi(nalezy do)V. 
+Należy znaleźć ścieżkę łączącą wszystkie wierzchołki (każdy odwiedzony min. raz) taką, 
+aby minimalizować jej koszt S. Koszt S obliczany jest w taki sposób, że stanowi ona sumę
 wszystkich wag krawędzi licząc od tej wychodzącej z pierwszego wierzchołka ścieżki do
 wagi krawędzi wchodzącej do ostatniego wierzchołka ścieżki, w taki jednak sposób, że jeśli
-właśnie dodawana do S waga wi jest większa niż następna waga krawędzi na tej ścieżce: (tj.
-niż waga wi+1), wtedy do sumy dodajemy nie samo wi, ale jej x-krotność (czyli x * wi).
+właśnie dodawana do S waga wi jest większa niż następna waga krawędzi na tej ścieżce: 
+(tj. niż waga wi+1), wtedy do sumy dodajemy nie samo wi, ale jej x-krotność (czyli x * wi).
 Przyjąć początkowo: |V| minimum 100, deg(v) = [1, 6], wi = [1, 100], x = minimum 5.
