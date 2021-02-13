@@ -41,20 +41,41 @@ def GenerateGraph(V, mindeg = 1, maxdeg = 6):
         graf.append(sublst)
     return graf
 
-def CreateMatrix(graph):
+def CreateMatrix(graph, minw = 1, maxw = 1):
+    '''Creates matrix of provided graph \n
+    Graph can be weighted using [minw] as minimum weight and [maxw] as maximum weight.\n
+    Otherwise graph isn't weighted (every edge has weight = 1)
+    '''
+
     matrix = [[0 for i in range(len(graph))] for j in range(len(graph))]
     for i in range(len(graph)):
         for j in range(len(graph[i])):
             if matrix[i][graph[i][j]] == 0:
-                matrix[i][graph[i][j]] = 1
+                # matrix[i][graph[i][j]] = 1
+                if minw != maxw:
+                    weight = random.randrange(minw, maxw+1)
+                else:
+                    weight = 1
+                matrix[i][graph[i][j]] = weight
+                matrix[graph[i][j]][i] = weight
 
     return matrix
+def SaveMatrix(matrix):
+    fh = open('graph.txt','w')
+    for line in matrix:
+        line = str(line)
+        fh.write(line.lstrip('[').rstrip(']'))
+        fh.write('\n')
+    fh.close()
+
 # print(GenerateGraph(10))
 if __name__ == '__main__':
     G = GenerateGraph(10)
-    matrix = CreateMatrix(G)
+    matrix = CreateMatrix(G, 1, 100)
     for i, sublst in enumerate(G):
         print(f'{i}: {sublst}')
+
+    SaveMatrix(matrix)
 
     for line in matrix:
         for symbol in line:
