@@ -1,8 +1,10 @@
 # Skrypt generuje spójny graf nieskierowany z wagami z przedziału podanego przez użytkownika.
 import random
 
+
+
 def GenerateGraph(V, mindeg = 1, maxdeg = 6):
-    
+    """Generuje graf o [V] liczbie wierzcholow"""
     
     # for i in range(len(matrix)):
     #     i_deg = random.randrange(mindeg,maxdeg+1)
