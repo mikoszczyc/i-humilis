@@ -29,10 +29,10 @@ def GenerateGraph(V, mindeg = 1, maxdeg = 6):
         for iter in range(i_deg):
             while True:
                 neighbour = random.randrange(V) # losuje sasiada
-                if(len(adj_lst[neighbour]) < maxdeg and neighbour != i):
+                if(len(adj_lst[neighbour]) < maxdeg+1 and neighbour != i):
                     break
                 
-            if(len(adj_lst[neighbour]) < maxdeg-1):
+            if(len(adj_lst[neighbour]) <= maxdeg-1 and len(adj_lst[i]) <= maxdeg - 1):
                 adj_lst[neighbour].append(i)
                 adj_lst[i].append(neighbour)
             
@@ -70,14 +70,14 @@ def SaveMatrix(matrix):
 
 # print(GenerateGraph(10))
 if __name__ == '__main__':
-    G = GenerateGraph(10)
+    G = GenerateGraph(100,1,6)
     matrix = CreateMatrix(G, 1, 100)
     for i, sublst in enumerate(G):
         print(f'{i}: {sublst}')
 
     SaveMatrix(matrix)
 
-    for line in matrix:
-        for symbol in line:
-            print(symbol, end=',')
-        print()
+    # for line in matrix:
+    #     for symbol in line:
+    #         print(symbol, end=',')
+    #     print()
