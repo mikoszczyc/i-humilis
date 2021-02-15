@@ -6,16 +6,6 @@ import random
 def GenerateGraph(V, mindeg = 1, maxdeg = 6):
     """Generuje graf o [V] liczbie wierzcholow"""
     
-    # for i in range(len(matrix)):
-    #     i_deg = random.randrange(mindeg,maxdeg+1)
-    #     for j in range(len(matrix[i])):
-    #         if i == j: continue
-            
-    #         # matrix[i][j] = random.randrange(mindeg, maxdeg+1)
-
-
-    # return matrix
-
     adj_lst = [[] for i in range(V)]
     graf = []
     for i in range(V):
@@ -70,7 +60,7 @@ def SaveMatrix(matrix):
 
 # print(GenerateGraph(10))
 if __name__ == '__main__':
-    G = GenerateGraph(100,1,6)
+    G = GenerateGraph(10,1,6)
     matrix = CreateMatrix(G, 1, 100)
     for i, sublst in enumerate(G):
         print(f'{i}: {sublst}')
