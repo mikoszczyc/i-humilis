@@ -10,19 +10,19 @@ def GenerateGraph(V, mindeg = 1, maxdeg = 6):
     graf = []
     for i in range(V):
         if len(adj_lst[i]) > mindeg:
-            i_deg = random.randrange(len(adj_lst[i]), maxdeg)
+            i_deg = random.randint(len(adj_lst[i]), maxdeg) # both included
         else:
-            i_deg = random.randrange(mindeg, maxdeg)
+            i_deg = random.randint(mindeg, maxdeg) # both included
         
         print(f'deg({i}) = {i_deg}')
 
         for iter in range(i_deg):
             while True:
-                neighbour = random.randrange(V) # losuje sasiada
-                if(len(adj_lst[neighbour]) < maxdeg+1 and neighbour != i):
+                neighbour = random.randrange(0,V) # losuje sasiada
+                if(len(adj_lst[neighbour]) < maxdeg and neighbour != i):
                     break
                 
-            if(len(adj_lst[neighbour]) <= maxdeg-1 and len(adj_lst[i]) <= maxdeg - 1):
+            if(len(adj_lst[neighbour])+1 <= maxdeg and len(adj_lst[i])+1 <= maxdeg):
                 adj_lst[neighbour].append(i)
                 adj_lst[i].append(neighbour)
             
@@ -30,6 +30,9 @@ def GenerateGraph(V, mindeg = 1, maxdeg = 6):
         sublst = list(dict.fromkeys(sublst))
         graf.append(sublst)
     return graf
+def PrintGraph(graph):
+    for line in graph:
+        print(line)
 
 def CreateMatrix(graph, minw = 1, maxw = 1):
     '''Creates matrix of provided graph \n
@@ -57,17 +60,16 @@ def SaveMatrix(matrix):
         fh.write(line.lstrip('[').rstrip(']'))
         fh.write('\n')
     fh.close()
+def PrintMatrix(matrix):
+    for line in matrix:
+        line = str(line)
+        print(line.lstrip('[').rstrip(']'))
 
 # print(GenerateGraph(10))
 if __name__ == '__main__':
-    G = GenerateGraph(10,1,6)
+    G = GenerateGraph(20,1,6)
     matrix = CreateMatrix(G, 1, 100)
     for i, sublst in enumerate(G):
         print(f'{i}: {sublst}')
 
     SaveMatrix(matrix)
-
-    # for line in matrix:
-    #     for symbol in line:
-    #         print(symbol, end=',')
-    #     print()
