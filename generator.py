@@ -1,7 +1,7 @@
 # Skrypt generuje spójny graf nieskierowany z wagami z przedziału podanego przez użytkownika.
+
 import random
-
-
+import time
 
 def GenerateGraph(V, mindeg = 1, maxdeg = 6):
     """Generuje graf o [V] liczbie wierzcholow"""
@@ -9,30 +9,37 @@ def GenerateGraph(V, mindeg = 1, maxdeg = 6):
     adj_lst = [[] for i in range(V)]
     graf = []
     for i in range(V):
+        # losowanie stopnia dla wierzchołka
         if len(adj_lst[i]) > mindeg:
             i_deg = random.randint(len(adj_lst[i]), maxdeg) # both included
         else:
             i_deg = random.randint(mindeg, maxdeg) # both included
         
-        print(f'deg({i}) = {i_deg}')
+        # print(f'deg({i}) = {i_deg}')
 
-        for iter in range(i_deg):
-            while True:
+        # dodawanie krawedzi do wierzcholka aby wypelnic jego stopien
+        for iter in range(i_deg): # od 0 do i_deg-1 - w efekcie ilosc sie zgadza
+            start_time = time.time()
+            while len(adj_lst[i]) < i_deg:
                 neighbour = random.randrange(0,V) # losuje sasiada
-                if(len(adj_lst[neighbour]) < maxdeg and neighbour != i):
+                if neighbour != i and len(adj_lst[neighbour]) < maxdeg:
+                    adj_lst[neighbour].append(i)
+                    adj_lst[i].append(neighbour)
+                    # print("Vertex added")
+                curr_time = time.time()
+                if curr_time - start_time > 3:
                     break
                 
-            if(len(adj_lst[neighbour])+1 <= maxdeg and len(adj_lst[i])+1 <= maxdeg):
-                adj_lst[neighbour].append(i)
-                adj_lst[i].append(neighbour)
             
     for sublst in adj_lst:
         sublst = list(dict.fromkeys(sublst))
         graf.append(sublst)
+    
+    # print('return graf')
     return graf
 def PrintGraph(graph):
-    for line in graph:
-        print(line)
+    for i, line in enumerate(graph,start=0):
+        print(f'{i}:{line}')
 
 def CreateMatrix(graph, minw = 1, maxw = 1):
     '''Creates matrix of provided graph \n
