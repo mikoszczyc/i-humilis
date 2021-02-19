@@ -12,10 +12,10 @@ def evaporate(rate = 0.2, t_init = 1):
             if pheromones[i][j] < 0:
                 pheromones[i][j] = 0
 
-def markWithPheromones(path):
+def markWithPheromones(path, amount = 1):
     for i in range(len(path)-1):
         j = i+1
-        pheromones[path[i]][path[j]] += 1 # na razie niech to będzie 1
+        pheromones[path[i]][path[j]] += round(amount,2) # wartosc jest najwieksza dla najlepszego rozwiazania i potem maleje
 
 def sillyAnt(graph):
     # zaczyna z losowego wierzcholka
@@ -40,8 +40,23 @@ def sillyAnt(graph):
     
     return sillyPath
 
-def brainyAnt():
+def brainyAnt(graph):
     # smart ant code here
+    # 47:00 na nagraniu zaczyna opowiadać o mądrych mrówkach
+
+    # mrówka zaczyna od losowego wierzchołka
+
+    # czy mrówka korzysta z macierzy feromonowej? (T/N) zależy od ilości wykonanych iteracji
+    # w początkowych iteracjach prawdopodobieństwo powinno być niskie ALE NIE 0
+
+    # mrówka nie korzysta z feromonów
+    # wybiera losowo kolejną ścieżkę - ALE potem może znowu podjąć decyzję o używaniu feromonów
+
+    # mrówka korzysta z feromonów
+    # losowana jest liczba (1,100) /roll(), trzeba podzielić to na przedziały i wybrać na tej podstawie kolejną krawędź
+    # im większa wartość feromonów tym większa szansa na wybranie ścieżki
+    # np. 3 - 1 = 75% - 25%
+
     return ant
 
 def PrintPheromones():
@@ -104,7 +119,7 @@ test.sort(key=lambda x:x[1])
 print(test[:4])
 luckySillyAnts = int(ants/5) # 20% najlepszych głupich mrówek miało szczęście i zaznaczyły ścieżkę feromonami
 for i in range(luckySillyAnts):
-    markWithPheromones(test[i][0])
+    markWithPheromones(test[i][0],1-i/5/2) # wartosc feromonu spada razem z jakoscia polaczenia
 
 # print(solutions)
 # print(f'First path: {sillyAnt(graph)}')
