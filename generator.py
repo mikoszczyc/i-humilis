@@ -60,8 +60,8 @@ def CreateMatrix(graph, minw = 1, maxw = 1):
                 matrix[graph[i][j]][i] = weight
 
     return matrix
-def SaveMatrix(matrix):
-    fh = open('graph.txt','w')
+def SaveMatrix(matrix, i):
+    fh = open(f'testy/inst{i}.txt','w')
     for line in matrix:
         line = str(line)
         fh.write(line.lstrip('[').rstrip(']'))
@@ -73,9 +73,9 @@ def PrintMatrix(matrix):
         print(line.lstrip('[').rstrip(']'))
 
 if __name__ == '__main__':
-    G = GenerateGraph(20,1,6)
-    matrix = CreateMatrix(G, 1, 100)
-    for i, sublst in enumerate(G):
-        print(f'{i}: {sublst}')
-
-    SaveMatrix(matrix)
+    for i in range(100):
+        G = GenerateGraph(100,1,6)
+        matrix = CreateMatrix(G, 1, 100)
+        # for i, sublst in enumerate(G):
+        #     print(f'{i}: {sublst}')
+        SaveMatrix(matrix,i)
