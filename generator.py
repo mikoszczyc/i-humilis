@@ -72,7 +72,6 @@ def PrintMatrix(matrix):
         line = str(line)
         print(line.lstrip('[').rstrip(']'))
 
-# print(GenerateGraph(10))
 if __name__ == '__main__':
     G = GenerateGraph(20,1,6)
     matrix = CreateMatrix(G, 1, 100)
