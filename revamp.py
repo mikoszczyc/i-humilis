@@ -8,7 +8,7 @@ import math
 
 V = 100 # ilosc wierzcholkow
 x = 5 # mnoznik kary
-ants = 50 # ilosc mrowek
+ants = 30 # ilosc mrowek
 enhancement_time = 10
 
 def sillyAnt(graph):
@@ -144,8 +144,9 @@ def SavePheromones():
 # graph = generator.GenerateGraph(V)
 # matrix = generator.CreateMatrix(graph,1,100)
 # generator.SaveMatrix(matrix)
-for enhancement_time in range(20,121,20):
-    for instance in range(100):
+for enhancement_time in range(10,121,10):
+    for instance in range(50):
+        print(f'{enhancement_time}:inst{instance}')
         fh = open(f'testy/inst{instance}.txt')
         # fh = open('testy/test.txt')
         graph = []
@@ -199,7 +200,7 @@ for enhancement_time in range(20,121,20):
         ranking.sort(key=lambda x:x[1]) # sortowanie wg. jakosci sciezki
         bestSolution = ranking[0] # najlepsze rozwiązanie po 1 przejściu
         oh = open(f'wyniki/inst{instance}_results.txt','a')
-        oh.write(f"first:{bestSolution}\n")
+        oh.write(f"r{enhancement_time}:{bestSolution[1]}\t")
 
         luckySillyAnts = int(ants/5) # 20% najlepszych głupich mrówek miało szczęście i zaznaczyły ścieżkę feromonami
         for i in range(luckySillyAnts):
@@ -241,5 +242,5 @@ for enhancement_time in range(20,121,20):
         ranking.sort(key=lambda x:x[1]) # sortowanie wg. jakosci sciezki
         bestSolution = ranking[0] # najlepsze rozwiązanie po 1 przejściu
         
-        oh.write(f"{enhancement_time}:{bestSolution}\n")
+        oh.write(f"{enhancement_time}:{bestSolution[1]}\n")
         oh.close()
